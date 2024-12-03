@@ -67,7 +67,7 @@ public class ElasticsearchClientRepository {
                                             )._toQuery()
                                     ).mustNot(mustBuilder -> mustBuilder
                                             .term(termsBuilder -> termsBuilder
-                                                    .field("internalTransfer")
+                                                    .field("isInternalTransfer")
                                                     .value(true)
                                             ))
                             )
