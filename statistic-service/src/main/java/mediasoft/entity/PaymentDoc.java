@@ -30,7 +30,7 @@ public class PaymentDoc {
     @Field(type = FieldType.Date, format = DateFormat.basic_date, pattern = "yyyy-MM-dd")
     private LocalDate createAt;
 
-    @Field(value = "is_internal_transfer")
+    @Field(value = "isInternalTransfer")
     private boolean isInternalTransfer;
 
     @Override

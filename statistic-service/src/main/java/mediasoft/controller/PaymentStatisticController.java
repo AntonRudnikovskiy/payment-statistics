@@ -1,33 +1,32 @@
 package mediasoft.controller;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import mediasoft.dto.PaymentStatisticsDto;
-import mediasoft.dto.StatisticsDto;
 import mediasoft.dto.TransferDto;
-import mediasoft.dto.UserRequestStatisticsDto;
-import mediasoft.mapper.PaymentStatisticsMapper;
 import mediasoft.service.PaymentStatisticsServiceImpl;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/statistic")
+@RequestMapping("api/v1/")
 public class PaymentStatisticController {
     private final PaymentStatisticsServiceImpl paymentStatisticsService;
-    private final PaymentStatisticsMapper paymentStatisticsMapper;
 
-    @GetMapping("/")
-    public ResponseEntity<List<PaymentStatisticsDto>> getPaymentStatistics(@RequestBody @Valid UserRequestStatisticsDto dto) {
-        StatisticsDto statisticsDto = paymentStatisticsMapper.toStatisticsDto(dto);
-        return ResponseEntity.ok(paymentStatisticsService.getPaymentStatistics(statisticsDto));
+    @GetMapping("/statistic")
+    public ResponseEntity<List<PaymentStatisticsDto>> getPaymentStatistics(
+            @RequestParam Long clientId,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+        return ResponseEntity.ok(paymentStatisticsService.getPaymentStatistics(clientId, startDate, endDate));
     }
 
-    @GetMapping("/{client}")
-    public ResponseEntity<TransferDto> getTransferStatistics(@PathVariable Long client) {
-        return ResponseEntity.ok(paymentStatisticsService.getTransfersStatistics(client));
+    @GetMapping("/statistic/{clientId}")
+    public ResponseEntity<TransferDto> getTransferStatistics(@PathVariable Long clientId) {
+        return ResponseEntity.ok(paymentStatisticsService.getTransfersStatistics(clientId));
     }
 }

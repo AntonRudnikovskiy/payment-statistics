@@ -19,6 +19,14 @@ spring:
     consumer:
       key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: payment-events-listener-group
+    topics:
+      payment-events: payment-events
+
 
 bank:
   biks: 3463568453, 56735674562, 8957896789789, 3452463457
+
+okved:
+  url: https://suggestions.dadata.ru
+  token: 57da7400b682468b82932a3172fae51c3a57dbfa

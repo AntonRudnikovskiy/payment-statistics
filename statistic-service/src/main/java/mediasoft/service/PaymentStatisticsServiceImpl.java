@@ -12,6 +12,7 @@ import mediasoft.repository.ElasticsearchClientRepository;
 import mediasoft.repository.PaymentRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +25,8 @@ public class PaymentStatisticsServiceImpl implements PaymentStatisticsService {
     private final ElasticsearchClientRepository clientRepository;
 
     @Override
-    public List<PaymentStatisticsDto> getPaymentStatistics(StatisticsDto dto) {
-        return clientRepository.getPaymentStatsByIdAndDateRange(dto.getUserId(), dto.getStartDate(), dto.getEndDate())
+    public List<PaymentStatisticsDto> getPaymentStatistics(Long id, LocalDate startDate, LocalDate endDate) {
+        return clientRepository.getPaymentStatsByIdAndDateRange(id, startDate, endDate)
                 .aggregations()
                 .get("category")
                 .sterms()
@@ -46,6 +47,6 @@ public class PaymentStatisticsServiceImpl implements PaymentStatisticsService {
                 .sum()
                 .value())
                 .map(statisticsMapper::mapBucketToTransferDto)
-                .orElseThrow(() -> new EntityNotFoundException("Document nof found"));
+                .orElseThrow(() -> new EntityNotFoundException("Document not found"));
     }
 }

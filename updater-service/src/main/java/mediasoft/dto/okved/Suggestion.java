@@ -1,16 +1,14 @@
 package mediasoft.dto.okved;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Suggestion {
-    private String value;
+    private final String value;
     @JsonProperty("unrestricted_value")
-    private String unrestrictedValue;
-    private OkvedData data;
+    private final String unrestrictedValue;
+    private final OkvedData data;
 }

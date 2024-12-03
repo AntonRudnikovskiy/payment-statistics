@@ -17,8 +17,8 @@ public class PaymentConsumer {
     private final JsonMapper jsonMapper;
 
     @KafkaListener(
-            topics = "payment-events",
-            groupId = "payment-events-listener-group"
+            topics = "${spring.kafka.topics.payment-events}",
+            groupId = "${spring.kafka.consumer.group-id}"
     )
     public void onMessage(ConsumerRecord<Integer, String> consumerRecord) {
         try {

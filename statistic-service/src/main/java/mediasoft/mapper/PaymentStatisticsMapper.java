@@ -2,22 +2,13 @@ package mediasoft.mapper;
 
 import co.elastic.clients.elasticsearch._types.aggregations.StringTermsBucket;
 import mediasoft.dto.PaymentStatisticsDto;
-import mediasoft.dto.StatisticsDto;
 import mediasoft.dto.TransferDto;
-import mediasoft.dto.UserRequestStatisticsDto;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
 @Component
 public class PaymentStatisticsMapper {
-    public StatisticsDto toStatisticsDto(UserRequestStatisticsDto dto) {
-        return StatisticsDto.builder()
-                .userId(dto.getUserId())
-                .startDate(dto.getStartDate())
-                .endDate(dto.getEndDate())
-                .build();
-    }
 
     public PaymentStatisticsDto mapBucketToStatisticsDto(StringTermsBucket bucket) {
         BigDecimal totalAmount = BigDecimal.valueOf(0.0);

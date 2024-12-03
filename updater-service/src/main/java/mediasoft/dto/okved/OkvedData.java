@@ -1,15 +1,13 @@
 package mediasoft.dto.okved;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class OkvedData {
-    private String idx;
-    private String razdel;
-    private String code;
-    private String name;
+    private final String idx;
+    private final String razdel;
+    private final String code;
+    private final String name;
 }
